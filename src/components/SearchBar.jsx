@@ -1,9 +1,10 @@
-import React,{useState} from 'react'
+import React,{useContext} from 'react'
 import '../styles/SearchBar.css'
+import {SearchContext}from '../context/Serchconstext'
 
 
 function SearchBar() {
-    const [serchValue, setSerchValue]=useState('')
+    const {serchValue, setSerchValue}=useContext(SearchContext)
     const onSearchValueChange=(event)=>{
         setSerchValue(event.target.value)
     }

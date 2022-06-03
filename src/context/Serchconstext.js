@@ -1,17 +1,22 @@
-import React ,{ createContext,useState } from "react";
-
+import React ,{ createContext,useMemo,useState } from "react";
+import {electronicsList,sportsList}from '../assets/filteredByCategories'
 const SearchContext=createContext()
 
-function SearchProvide(props)
+function SearchProvider(props)
 {
 
     const [SearchValue,setSearchValue]= useState('')
-    const filterProducts=()=>{}
+    const filterProducts=useMemo(()=>{
+        electronicsList.filter((item)=>{
+            return item.name.toLowerCase().includes(SearchValue.toLowerCase())
+        })
+    },[SearchValue])
     return(
-        <SearchContext.Provider value={SearchValue}>
+        <SearchContext.Provider value={{
+            SearchValue,filterProducts}}>
             {props.children}
         </SearchContext.Provider>
     )
 }
-export {SearchContext,SearchProvide}
+export {SearchProvider,SearchContext}
 
